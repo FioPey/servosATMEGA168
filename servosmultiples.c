@@ -1,6 +1,6 @@
-#define F_CPU 16000000L				//16MHz 16.000.000Hz Tinc una precisiò de 0.06º aprox
-#define MIN_PULS_WITH 0.704
-#define MAX_PULS_WITH 2.500
+#define F_CPU 			16000000L				//16MHz 16.000.000Hz Tinc una precisiò de 0.06º aprox
+#define MIN_PULS_WITH 	0.704
+#define MAX_PULS_WITH 	2.500
 #define CLOCKS_PER_ANGLE ((MAX_PULS_WITH-MIN_PULS_WITH)/0.0005)/180.0
 #define CLOCKS_PER_CICLE 40000
 #define CLOCKS_PER25	  5000
