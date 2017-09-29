@@ -7,16 +7,16 @@
 
 #include <avr/io.h>					//Registres interns i periferics
 #include <avr/interrupt.h>			//Per les interrupccio
-#define N_SERVOS 2
+#define N_SERVOS 3
 
 int angles2clocks(float _angle);
 typedef enum {FALSE,TRUE}bool;
 volatile bool puja=TRUE;
 volatile unsigned char n_cicles=0;
-float angles[N_SERVOS]={90.0,150.0};
+float angles[N_SERVOS]={90.0,180.0,90.0};
 int main(void)
 {
-	DDRB = 0x03;					//0b010000 el bit 5 és el pin 4 i el posa en output (hi posa un 1), la resta 0 (INPUT)
+	DDRB = 0b00111;					//0b010000 el bit 5 és el pin 4 i el posa en output (hi posa un 1), la resta 0 (INPUT)
 	PORTB = 0x01;						//un 0 al bit del pin fa que sigui low, un 1 el fa high ,si és input un 0 res, un 1 activa el pull-up (a +5V)
 	OCR1A =angles2clocks(angles[n_cicles]);			//numero de cloks per arribar al pols del servo
 	TCCR1B |= (1 << WGM12); 		// Mode 4, CTC al OCR1A
