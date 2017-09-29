@@ -1,3 +1,6 @@
+#include <avr/io.h>					//Registres interns i periferics
+#include <avr/interrupt.h>			//Per les interrupccio
+
 #define F_CPU 16000000L				//16MHz 16.000.000Hz Tinc una precisiò de 0.06º aprox
 #define MIN_PULS_WITH 0.704
 #define MAX_PULS_WITH 2.512
@@ -5,8 +8,6 @@
 #define CLOCKS_PER_CICLE 40000
 #define CLOCKS_PER25	  5000
 
-#include <avr/io.h>					//Registres interns i periferics
-#include <avr/interrupt.h>			//Per les interrupccio
 #define N_SERVOS 2
 
 int angles2clocks(float _angle);
@@ -67,23 +68,3 @@ ISR (TIMER1_COMPA_vect)//Cada vegada que el comptador arribi al que se li ha dit
 		PORTB=(1<<(n_cicles));
 	}
 }
-
-
-/*
->>> 1/16000000.0
-6.25e-08
->>> 1/16000000.0 * 1000
-6.25e-05
->>> 1/16000000.0 * 1000 * 8
-0.0005
->>> 1/(1/16000000.0 * 1000 * 8)
-2000.0
->>> 180.0/2000.0
-0.09
->>> 2000.0/180.0
-11.11111111111111
->>> 3000.0/180
-16.666666666666668
->>> 180.0/3000
-0.06
-*/
