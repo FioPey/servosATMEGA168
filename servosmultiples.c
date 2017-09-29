@@ -10,27 +10,32 @@
 
 #define N_SERVOS 2
 
-float angles[N_SERVOS]={90.0,72.0};
-
-int angles2clocks(float _angle);
 typedef enum {FALSE,TRUE}bool;
-volatile bool puja=TRUE;
-volatile unsigned char n_cicles=0;
-volatile int clocks_a_comptar=2500;
+
+
+float angles[N_SERVOS]={90.0,72.0};	//vector que guarda el valor dels angles a escriure als servos
+volatile bool puja=TRUE;			//Per saber si estem al high o al low dins els primers 2.5 ms
+volatile unsigned char n_cicles=0;	//Per saber quin dels 8 servos és
+volatile int clocks_a_comptar=2500;	//Iniciem el servo 0 a 1.250 ms
+unsigned long long time_now=0;
+
+int angles2clocks(float _angle);	//Funció que transforma l'angle en l'amplada del pols
 
 int main(void)
 {
-	DDRB = 0b00111;					//0b010000 el bit 5 és el pin 4 i el posa en output (hi posa un 1), la resta 0 (INPUT)
-	PORTB = 0x01;						//un 0 al bit del pin fa que sigui low, un 1 el fa high ,si és input un 0 res, un 1 activa el pull-up (a +5V)
-	OCR1A =clocks_a_comptar;			//numero de cloks per arribar al pols del servo
-	TCCR1B |= (1 << WGM12); 		// Mode 4, CTC al OCR1A
+	DDRB = 0b00011;					//PB0 i PB1 com a sortides
+	PORTB = 0x01;					//PB0 en high
+	OCR1A =clocks_a_comptar;		//numero de clocks en high per donar l'angle correcte 
+	TCCR1B |= (1 << WGM12); 		//mode 4, CTC al OCR1A (torna el comptador de temps a 0 quan arriba al registre esmentat)
 	TIMSK1 |= (1 << OCIE1A);		//definim interrupcciò al coincidir
-	TCCR1B |= (1 << CS11); 			//prescaler 8
-	sei();							// activa les interrupccions
-	while (1);
+	TCCR1B |= (1 << CS11); 			//prescaler 8 que dona una precisió  de 5 microsegons
+	//Timer 0 per comptar el temps
+	TIMSK0=
+	sei();							//activa les interrupccions
+	while (1);						
 }
 
-int angles2clocks(float _angle)
+int angles2clocks(float _angle)		//converteix el valor de l'angle que volem en el numero de clocks que ha de fer el rellotge per donar-lo
 {
 	if(_angle<1) _angle=1;
 	else if (_angle>179) _angle=179;
