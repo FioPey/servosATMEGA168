@@ -1,0 +1,122 @@
+[multipleServos]$ git init
+S'ha inicialitzat un buit dipòsit de Git a /home/fio/pro/AVR/multipleServos/.git/
+[multipleServos]$ git status
+En la branca master
+
+Comissió inicial
+
+Fitxers no seguits:
+  (useu "git add <fitxer>..." per a incloure-ho en què es cometrà)
+
+	compilador168.sh
+	git_comands
+	multipleServos.c
+
+no hi ha res afegit a cometre però fitxers no seguits estan presents (useu "git add" per a seguir-los)
+[multipleServos]$ git status 
+En la branca master
+
+Comissió inicial
+
+Fitxers no seguits:
+  (useu "git add <fitxer>..." per a incloure-ho en què es cometrà)
+
+	compilador168.sh
+	git_comands
+	multipleServos.c
+
+no hi ha res afegit a cometre però fitxers no seguits estan presents (useu "git add" per a seguir-los)
+[multipleServos]$ git add multipleServos.c 
+[multipleServos]$ git status 
+En la branca master
+
+Comissió inicial
+
+Canvis a cometre:
+  (useu "git rm --cached <fitxer>..." per a desallistar)
+
+	fitxer nou:       multipleServos.c
+
+Fitxers no seguits:
+  (useu "git add <fitxer>..." per a incloure-ho en què es cometrà)
+
+	compilador168.sh
+	git_comands
+
+[multipleServos]$ git commit -m "intent d'integraciò d'un segon servo però no tira"
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'fio@Hefest.(none)')
+[multipleServos]$ git config --global user.email "ferriol73pey@gmail.com"
+[multipleServos]$ git config --global user.name "Ferriol"
+[multipleServos]$ git commit -m "intent d'integraciò d'un segon servo però no tira"
+[master (comissió d'arrel) a9dff10] intent d'integraciò d'un segon servo però no tira
+ 1 file changed, 96 insertions(+)
+ create mode 100644 multipleServos.c
+[multipleServos]$ git log
+commit a9dff109a3fa0409d5aecf5e55b055567560ebbf
+Author: Ferriol <ferriol73pey@gmail.com>
+Date:   Wed Sep 27 23:13:11 2017 +0200
+
+    intent d'integraciò d'un segon servo però no tira
+[multipleServos]$ git branch prova1
+[multipleServos]$ git checkout prova1 
+S'ha agafat la branca 'prova1'
+[multipleServos]$ git rm multipleServos.c 
+rm 'multipleServos.c'
+[multipleServos]$ rm multipleServos.c 
+rm: no s’ha pogut eliminar 'multipleServos.c': El fitxer o directori no existeix
+[multipleServos]$ git commit -m "he eliminat l'arxiu"
+[prova1 f93f40f] he eliminat l'arxiu
+ 1 file changed, 96 deletions(-)
+ delete mode 100644 multipleServos.c
+[multipleServos]$ git che
+checkout      cherry        cherry-pick   
+[multipleServos]$ git che
+checkout      cherry        cherry-pick   
+[multipleServos]$ git checkout master 
+S'ha agafat la branca 'master'
+[multipleServos]$ git branch -d 
+master   prova1   
+[multipleServos]$ git branch -d prova1 
+error: La branca 'prova1' no està totalment fusionada.
+Si esteu segur que la voleu suprimir, executeu 'git branch -D prova1'.
+[multipleServos]$ git merge
+merge       mergetool   
+[multipleServos]$ git merge
+merge       mergetool   
+[multipleServos]$ git merge
+fatal: No hi ha cap remot per a la branca actual.
+[multipleServos]$ git checkout prova1 
+S'ha agafat la branca 'prova1'
+[multipleServos]$ git merge
+fatal: No hi ha cap remot per a la branca actual.
+[multipleServos]$ git merge master 
+Already up-to-date.
+[multipleServos]$ git merge prova1 
+Already up-to-date.
+[multipleServos]$ git commit -m "fusio de les branques"
+En la branca prova1
+Fitxers no seguits:
+	compilador168.sh
+	git_comands
+
+no hi ha res afegit a cometre però fitxers no seguits estan presents
+[multipleServos]$ git checkout master
+S'ha agafat la branca 'master'
+[multipleServos]$ git merge prova1 
+Actualitzant a9dff10..f93f40f
+Fast-forward
+ multipleServos.c | 96 --------------------------------------------------------
+ 1 file changed, 96 deletions(-)
+ delete mode 100644 multipleServos.c
+[multipleServos]$
