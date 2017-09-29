@@ -1,5 +1,8 @@
 #!/bin/bash
 
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+printf "${RED} COMENSA LA COMPILACIO ${NC} \n"
 avr-gcc -Os -DF_CPU=16000000UL -mmcu=atmega168p -c -o "$1".o "$1".c 
 avr-gcc -mmcu=atmega168p "$1".o -o "$1"
 avr-objcopy -O ihex -R .eeprom "$1" "$1".hex
