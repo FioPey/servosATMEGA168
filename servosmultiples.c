@@ -7,13 +7,13 @@
 
 #include <avr/io.h>					//Registres interns i periferics
 #include <avr/interrupt.h>			//Per les interrupccio
-#define N_SERVOS 3
+#define N_SERVOS 2
 
 int angles2clocks(float _angle);
 typedef enum {FALSE,TRUE}bool;
 volatile bool puja=TRUE;
 volatile unsigned char n_cicles=0;
-float angles[N_SERVOS]={90.0,180.0,90.0};
+float angles[N_SERVOS]={90.0,72.0};
 int main(void)
 {
 	DDRB = 0b00111;					//0b010000 el bit 5 és el pin 4 i el posa en output (hi posa un 1), la resta 0 (INPUT)
@@ -28,6 +28,8 @@ int main(void)
 
 int angles2clocks(float _angle)
 {
+	if(_angle<1) _angle=1;
+	else if (_angle>179) _angle=179;
 	return (int)(MIN_PULS_WITH/0.0005 +CLOCKS_PER_ANGLE*_angle);
 }
 
@@ -46,7 +48,7 @@ ISR (TIMER1_COMPA_vect)//Cada vegada que el comptador arribi al que se li ha dit
 			if(n_cicles+1<N_SERVOS)
 			{
 				OCR1A=angles2clocks(angles[n_cicles+1]);//Torna a posar al cicle el que falta
-				PORTB=(1<<(n_cicles));
+				PORTB=(1<<(n_cicles+1));
 			}
 			else OCR1A=CLOCKS_PER25;
 			puja=TRUE; 
